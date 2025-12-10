@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sítio do Beto | Parque Aquático em Gravataí</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fontes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-slate-50 text-slate-900 font-poppins selection:bg-blue-200">
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 bg-transparent border-b border-transparent">
+        <div class="container mx-auto px-4 relative flex items-center h-16">
+            
+            <!-- LOGO: 
+                 Mobile: Absolute Center (left-1/2 -translate-x-1/2) 
+                 Desktop: Static Left (md:static md:translate-x-0) 
+            -->
+            <a href="#" id="nav-logo" class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 md:static md:transform-none md:mr-auto transition-all duration-300 z-50">
+                <img src="img/logo.png" alt="Logo Sítio do Beto" class="h-12 md:h-16 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform">
+            </a>
+
+            <!-- MENU DESKTOP (Direita) -->
+            <div class="hidden md:flex space-x-8 items-center ml-auto">
+                <a href="#inicio" class="nav-link text-white font-medium hover:text-yellow-400 transition-colors drop-shadow-sm text-sm lg:text-base">Início</a>
+                <a href="#sobre" class="nav-link text-white font-medium hover:text-yellow-400 transition-colors drop-shadow-sm text-sm lg:text-base">Sobre</a>
+                <a href="#atracoes" class="nav-link text-white font-medium hover:text-yellow-400 transition-colors drop-shadow-sm text-sm lg:text-base">Atrações</a>
+                <a href="#alugueis" class="nav-link text-white font-medium hover:text-yellow-400 transition-colors drop-shadow-sm text-sm lg:text-base">Aluguéis</a>
+                <a href="#valores" class="nav-link text-white font-medium hover:text-yellow-400 transition-colors drop-shadow-sm text-sm lg:text-base">Valores</a>
+                <a href="#localizacao" class="nav-link text-white font-medium hover:text-yellow-400 transition-colors drop-shadow-sm text-sm lg:text-base">Localização</a>
+                <a href="#faq" class="nav-link text-white font-medium hover:text-yellow-400 transition-colors drop-shadow-sm text-sm lg:text-base">Dúvidas</a>
+            </div>
+
+            <!-- BOTÃO HAMBURGUER (Mobile - Direita Absoluta) -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-yellow-400 transition-colors focus:outline-none absolute right-0 top-1/2 transform -translate-y-1/2 z-50">
+                <i data-lucide="menu" width="32" height="32"></i>
+            </button>
+        </div>
+
+        <!-- MENU MOBILE OVERLAY (Tela Cheia com Glassmorphism) -->
+        <div id="mobile-menu" class="fixed inset-0 bg-blue-900/90 backdrop-blur-xl z-40 hidden flex flex-col justify-center items-center space-y-8 transition-opacity duration-300 opacity-0 translate-y-full mobile-menu-transition">
+            <button id="close-mobile-menu" class="absolute top-6 right-6 text-white/80 hover:text-white">
+                <i data-lucide="x" width="40" height="40"></i>
+            </button>
+            
+            <div class="flex flex-col items-center space-y-6">
+                <a href="#inicio" class="mobile-link text-white text-3xl font-bold hover:text-yellow-400 transition-transform hover:scale-105">Início</a>
+                <a href="#sobre" class="mobile-link text-white text-3xl font-bold hover:text-yellow-400 transition-transform hover:scale-105">Sobre</a>
+                <a href="#atracoes" class="mobile-link text-white text-3xl font-bold hover:text-yellow-400 transition-transform hover:scale-105">Atrações</a>
+                <a href="#alugueis" class="mobile-link text-white text-3xl font-bold hover:text-yellow-400 transition-transform hover:scale-105">Aluguéis</a>
+                <a href="#valores" class="mobile-link text-white text-3xl font-bold hover:text-yellow-400 transition-transform hover:scale-105">Valores</a>
+                <a href="#localizacao" class="mobile-link text-white text-3xl font-bold hover:text-yellow-400 transition-transform hover:scale-105">Localização</a>
+            </div>
+
+            <div class="mt-12 flex gap-8">
+                <a href="https://www.instagram.com/sitiodobetooficial/" target="_blank" class="text-white hover:text-pink-500 transition-colors"><i data-lucide="instagram" width="36" height="36"></i></a>
+                <a href="https://www.facebook.com/p/Sitio-Do-Beto-100063943324780/?locale=pt_BR" target="_blank" class="text-white hover:text-blue-400 transition-colors"><i data-lucide="facebook" width="36" height="36"></i></a>
+                <a href="https://wa.me/5551984148247" target="_blank" class="text-white hover:text-green-400 transition-colors"><i data-lucide="message-circle" width="36" height="36"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-blue-900/40 z-10"></div>
+        
+        <!-- FOTO DE FUNDO -->
+        <div class="absolute inset-0 z-0">
+            <img src="img/capa.png" 
+                 alt="Sítio do Beto Vista Aérea" 
+                 class="w-full h-full object-cover animate-ken-burns">
+        </div>
+
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto text-white flex flex-col items-center">
+            
+            <!-- LOGO HERO (Aparecendo suavemente) -->
+            <div class="mb-8 animate-fade-in-slow">
+                <img src="img/logo.png" 
+                     alt="Sítio do Beto" 
+                     class="w-64 md:w-[500px] h-auto object-contain drop-shadow-2xl opacity-95 hover:scale-105 transition-transform duration-700">
+            </div>
+
+            <p class="text-xl md:text-3xl mb-10 font-light drop-shadow-md text-blue-50 animate-fadeIn delay-500">
+                Diversão, água e natureza para toda a família em Gravataí!
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fadeIn delay-700">
+                <a href="#atracoes" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(37,99,235,0.5)] border-2 border-transparent hover:border-blue-400">
+                    Ver Atrações
+                </a>
+                <a href="#valores" class="px-8 py-4 bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(250,204,21,0.5)]">
+                    Comprar Ingressos
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 z-20 animate-bounce text-white/80 hover:text-white transition-colors cursor-pointer">
+            <a href="#sobre"><i data-lucide="chevron-down" width="48" height="48"></i></a>
+        </div>
+    </section>
+
+    <!-- SOBRE NÓS -->
+    <section id="sobre" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2 block">Quem Somos</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Bem-vindo ao Paraíso</h2>
+                <div class="w-24 h-1.5 bg-yellow-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 order-2 md:order-1">
+                    <h3 class="text-3xl font-bold text-gray-800 leading-snug">O maior centro de lazer de <span class="text-blue-600">Gravataí - RS</span></h3>
+                    <div class="space-y-4 text-gray-600 text-lg leading-relaxed">
+                        <p>
+                            O Sítio do Beto é referência em diversão e natureza. Com uma estrutura impressionante que conta com 
+                            <strong class="text-blue-700">17 piscinas para adultos e 5 piscinas infantis</strong>, oferecemos opções para todos os gostos, 
+                            desde o relaxamento até a adrenalina radical.
+                        </p>
+                        <p>
+                            Nossa missão é proporcionar um ambiente seguro e familiar, cercado por natureza preservada. 
+                            Aqui você encontra infraestrutura completa, segurança monitorada e rigorosos padrões de qualidade.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4 pt-4">
+                        <div class="flex flex-col items-center p-4 bg-blue-50 rounded-2xl hover:bg-blue-100 transition-colors">
+                            <i data-lucide="shield-check" class="text-blue-600 w-8 h-8 mb-2"></i>
+                            <span class="font-bold text-blue-900 text-sm md:text-base">Segurança</span>
+                        </div>
+                        <div class="flex flex-col items-center p-4 bg-green-50 rounded-2xl hover:bg-green-100 transition-colors">
+                            <i data-lucide="trees" class="text-green-600 w-8 h-8 mb-2"></i>
+                            <span class="font-bold text-green-900 text-sm md:text-base">Natureza</span>
+                        </div>
+                        <div class="flex flex-col items-center p-4 bg-yellow-50 rounded-2xl hover:bg-yellow-100 transition-colors">
+                            <i data-lucide="smile" class="text-yellow-600 w-8 h-8 mb-2"></i>
+                            <span class="font-bold text-yellow-900 text-sm md:text-base">Diversão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative order-1 md:order-2 group">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <video autoplay muted loop playsinline class="relative rounded-2xl shadow-2xl w-full object-cover h-[400px] md:h-[500px] transform transition duration-500 hover:scale-[1.01]" 
+                           poster="./img/logo.png">
+                        <source src="./video/video sitio.mp4" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl hidden md:block z-20 animate-bounce-slow">
+                        <p class="text-5xl font-bold text-blue-600">22</p>
+                        <p class="text-gray-600 font-medium">Piscinas no Total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ATRAÇÕES (Carrossel Interativo) -->
+    <section id="atracoes" class="py-24 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
+        <div class="container mx-auto px-4 relative">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2 block">Diversão Garantida</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Nossas Atrações</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                    Clique nas imagens para ampliar e ver detalhes.
+                </p>
+            </div>
+
+            <!-- Botões de Navegação -->
+            <button id="btn-prev" class="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-30 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg text-blue-900 hover:bg-blue-600 hover:text-white transition-all hidden md:flex items-center justify-center transform hover:scale-110">
+                <i data-lucide="chevron-left" width="28" height="28"></i>
+            </button>
+
+            <button id="btn-next" class="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-30 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg text-blue-900 hover:bg-blue-600 hover:text-white transition-all hidden md:flex items-center justify-center transform hover:scale-110">
+                <i data-lucide="chevron-right" width="28" height="28"></i>
+            </button>
+
+            <!-- Container do Carrossel -->
+            <div id="carousel-container" class="flex overflow-x-auto gap-6 pb-12 hide-scroll px-4 snap-x snap-mandatory scroll-smooth cursor-grab active:cursor-grabbing">
+                <!-- Item 1 -->
+                <div class="min-w-[85vw] md:min-w-[400px] bg-white rounded-3xl shadow-xl overflow-hidden snap-center transform hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openAttractionModal(0)">
+                        <img src="img/complexo1.webp" alt="Complexo de Piscinas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <div class="bg-white/90 text-blue-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all">
+                                <i data-lucide="plus-circle" width="18"></i> Ver Detalhes
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">Complexo de Piscinas</h3>
+                        <p class="text-gray-600 leading-relaxed">Incríveis 17 piscinas para adultos e 5 piscinas infantis espalhadas pelo parque.</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="min-w-[85vw] md:min-w-[400px] bg-white rounded-3xl shadow-xl overflow-hidden snap-center transform hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openAttractionModal(1)">
+                        <img src="img/toboga1.webp" alt="Toboáguas Radicais" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                             <div class="bg-white/90 text-blue-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all">
+                                <i data-lucide="plus-circle" width="18"></i> Ver Detalhes
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">Toboáguas Radicais</h3>
+                        <p class="text-gray-600 leading-relaxed">Emoção garantida com descidas de até 15m de altura e velocidade de 40km/h.</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="min-w-[85vw] md:min-w-[400px] bg-white rounded-3xl shadow-xl overflow-hidden snap-center transform hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openAttractionModal(2)">
+                        <img src="img/aventura.webp" alt="Tirolesa e Natureza" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                             <div class="bg-white/90 text-blue-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all">
+                                <i data-lucide="plus-circle" width="18"></i> Ver Detalhes
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">Tirolesa e Natureza</h3>
+                        <p class="text-gray-600 leading-relaxed">A maior tirolesa do estado com 360m e reserva ambiental para recarregar as energias.</p>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="min-w-[85vw] md:min-w-[400px] bg-white rounded-3xl shadow-xl overflow-hidden snap-center transform hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openAttractionModal(3)">
+                        <img src="img/jogo2.webp" alt="Esportes" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                             <div class="bg-white/90 text-blue-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all">
+                                <i data-lucide="plus-circle" width="18"></i> Ver Detalhes
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-3">Esportes e Jogos</h3>
+                        <p class="text-gray-600 leading-relaxed">Quadras de futebol e vôlei de areia, além de sala de jogos e muita diversão fora d'água.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFRAESTRUTURA -->
+    <section class="py-24 bg-blue-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/water-drip.png');"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Infraestrutura Completa</h2>
+                <p class="text-blue-200 text-lg">Segurança, conforto e serviços para um dia perfeito.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+                <!-- 1. Praça de Alimentação -->
+                <div class="flex flex-col items-center text-center group p-4 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="bg-blue-800/50 p-5 rounded-full mb-4 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 border border-blue-700 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="utensils" width="32" height="32"></i>
+                    </div>
+                    <span class="font-bold text-lg text-blue-50 mb-1">Praça de Alimentação</span>
+                    <p class="text-xs text-blue-300 opacity-80">Lanches e refeições variadas</p>
+                </div>
+
+                <!-- 2. Churrasqueiras -->
+                <div class="flex flex-col items-center text-center group p-4 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="bg-blue-800/50 p-5 rounded-full mb-4 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 border border-blue-700 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="flame" width="32" height="32"></i>
+                    </div>
+                    <span class="font-bold text-lg text-blue-50 mb-1">Quiosques & Churrasqueiras</span>
+                    <p class="text-xs text-blue-300 opacity-80">Com pia, luz e mesas</p>
+                </div>
+
+                <!-- 3. Estacionamento -->
+                <div class="flex flex-col items-center text-center group p-4 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="bg-blue-800/50 p-5 rounded-full mb-4 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 border border-blue-700 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="car" width="32" height="32"></i>
+                    </div>
+                    <span class="font-bold text-lg text-blue-50 mb-1">Estacionamento (900 Vagas)</span>
+                    <p class="text-xs text-blue-300 opacity-80">Fechado e com segurança</p>
+                </div>
+
+                <!-- 4. Monitores -->
+                <div class="flex flex-col items-center text-center group p-4 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="bg-blue-800/50 p-5 rounded-full mb-4 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 border border-blue-700 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="life-buoy" width="32" height="32"></i>
+                    </div>
+                    <span class="font-bold text-lg text-blue-50 mb-1">Equipe de Segurança</span>
+                    <p class="text-xs text-blue-300 opacity-80">Monitores e salva-vidas</p>
+                </div>
+
+                <!-- 5. Vestiários -->
+                <div class="flex flex-col items-center text-center group p-4 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="bg-blue-800/50 p-5 rounded-full mb-4 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 border border-blue-700 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="droplets" width="32" height="32"></i>
+                    </div>
+                    <span class="font-bold text-lg text-blue-50 mb-1">Vestiários Completos</span>
+                    <p class="text-xs text-blue-300 opacity-80">Banheiros e chuveiros</p>
+                </div>
+
+                <!-- 6. Enfermaria -->
+                <div class="flex flex-col items-center text-center group p-4 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="bg-blue-800/50 p-5 rounded-full mb-4 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 border border-blue-700 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="heart-pulse" width="32" height="32"></i>
+                    </div>
+                    <span class="font-bold text-lg text-blue-50 mb-1">Enfermaria de Plantão</span>
+                    <p class="text-xs text-blue-300 opacity-80">Primeiros socorros</p>
+                </div>
+
+                <!-- 7. Loja -->
+                <div class="flex flex-col items-center text-center group p-4 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="bg-blue-800/50 p-5 rounded-full mb-4 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 border border-blue-700 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="shopping-bag" width="32" height="32"></i>
+                    </div>
+                    <span class="font-bold text-lg text-blue-50 mb-1">Loja de Conveniência</span>
+                    <p class="text-xs text-blue-300 opacity-80">Artigos de banho e moda</p>
+                </div>
+
+                <!-- 8. Esportes -->
+                <div class="flex flex-col items-center text-center group p-4 rounded-2xl hover:bg-white/5 transition-all">
+                    <div class="bg-blue-800/50 p-5 rounded-full mb-4 text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 border border-blue-700 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="trophy" width="32" height="32"></i>
+                    </div>
+                    <span class="font-bold text-lg text-blue-50 mb-1">Quadras Esportivas</span>
+                    <p class="text-xs text-blue-300 opacity-80">Futebol e vôlei de areia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALUGUÉIS -->
+    <section id="alugueis" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Conforto Exclusivo</h2>
+                <p class="text-gray-600 text-lg">Garanta seu espaço VIP e aproveite o dia com mais privacidade.</p>
+            </div>
+
+            <!-- Grid responsivo para 4 itens: 1 coluna mobile, 2 tablet, 4 desktop -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item 1: Quiosque -->
+                <div class="group border border-gray-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white flex flex-col overflow-hidden hover:-translate-y-2">
+                    <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openRentalModal(0)">
+                        <img src="./img/pis8.webp" alt="Quiosque" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded-full text-xs shadow-lg z-10">
+                            R$ 70,00
+                        </div>
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                             <div class="bg-white/90 text-blue-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all text-sm">
+                                 <i data-lucide="image" width="16"></i> Ver Fotos
+                             </div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Quiosque com Churrasqueira</h3>
+                        <p class="text-gray-500 text-sm mb-4">Espaço reservado à beira do lago ou morro.</p>
+                        <div class="mb-6 flex-grow space-y-2">
+                            <p class="font-bold text-blue-600 text-sm flex items-center gap-2"><i data-lucide="users" width="16"></i> Até 12 pessoas</p>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-gray-600 text-xs"><i data-lucide="check" class="text-green-500 mr-2 w-3"></i> Churrasqueira</li>
+                                <li class="flex items-center text-gray-600 text-xs"><i data-lucide="check" class="text-green-500 mr-2 w-3"></i> Pia e Mesas</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5551984148247?text=Ol%C3%A1%2C+gostaria+de+reservar+um+Quiosque+com+Churrasqueira." target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-green-500/30 text-sm">
+                            <i data-lucide="message-circle" width="18"></i>
+                            Reservar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 2: Pousada -->
+                <div class="group border border-gray-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white flex flex-col overflow-hidden hover:-translate-y-2">
+                    <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openRentalModal(1)">
+                        <img src="img/p2.webp" alt="Pousada" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white font-bold px-3 py-1 rounded-full text-xs shadow-lg z-10">
+                            R$ 140+
+                        </div>
+                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                             <div class="bg-white/90 text-blue-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all text-sm">
+                                 <i data-lucide="image" width="16"></i> Ver Fotos
+                             </div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Hospedagem / Pousada</h3>
+                        <p class="text-gray-500 text-sm mb-4">Pacote completo com pernoite para 2 dias.</p>
+                        <div class="mb-6 flex-grow space-y-2">
+                            <p class="font-bold text-blue-600 text-sm flex items-center gap-2"><i data-lucide="bed" width="16"></i> Consulte Quartos</p>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-gray-600 text-xs"><i data-lucide="check" class="text-green-500 mr-2 w-3"></i> Ingresso Incluso</li>
+                                <li class="flex items-center text-gray-600 text-xs"><i data-lucide="check" class="text-green-500 mr-2 w-3"></i> Cozinha/Wi-Fi</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5551984148247?text=Ol%C3%A1%2C+gostaria+de+saber+sobre+Hospedagem+e+Pousada." target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-green-500/30 text-sm">
+                            <i data-lucide="message-circle" width="18"></i>
+                            Reservar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 3: Piscina Privativa (NOVO) -->
+                <div class="group border border-gray-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white flex flex-col overflow-hidden hover:-translate-y-2">
+                    <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openRentalModal(2)">
+                        <img src="img/pis1.webp" alt="Piscina Privativa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-purple-600 text-white font-bold px-3 py-1 rounded-full text-xs shadow-lg z-10">
+                            Exclusivo
+                        </div>
+                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                             <div class="bg-white/90 text-blue-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all text-sm">
+                                 <i data-lucide="image" width="16"></i> Ver Fotos
+                             </div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Piscina Privativa</h3>
+                        <p class="text-gray-500 text-sm mb-4">Espaço VIP com piscina exclusiva e salão.</p>
+                        <div class="mb-6 flex-grow space-y-2">
+                            <p class="font-bold text-blue-600 text-sm flex items-center gap-2"><i data-lucide="users" width="16"></i> 40 a 120 pessoas</p>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-gray-600 text-xs"><i data-lucide="check" class="text-green-500 mr-2 w-3"></i> Piscina Exclusiva</li>
+                                <li class="flex items-center text-gray-600 text-xs"><i data-lucide="check" class="text-green-500 mr-2 w-3"></i> Salão/Churrasq.</li>
+                            </ul>
+                        </div>
+                        <a href="https://wa.me/5551984148247?text=Ol%C3%A1%2C+tenho+interesse+na+Piscina+Privativa." target="_blank" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-purple-600/30 text-sm">
+                            <i data-lucide="message-circle" width="18"></i>
+                            Orçamento
+                        </a>
+                    </div>
+                </div>
+
+                 <!-- Item 4: Eventos -->
+                 <div class="group border border-gray-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white flex flex-col overflow-hidden hover:-translate-y-2">
+                    <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openEventsModal()">
+                        <img src="./img/sa6.webp" alt="Eventos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 right-4 bg-gray-800 text-white font-bold px-3 py-1 rounded-full text-xs shadow-lg z-10">
+                            Sob Consulta
+                        </div>
+                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                             <div class="bg-white/90 text-blue-900 px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all text-sm">
+                                 <i data-lucide="layout-grid" width="16"></i> Ver Espaços (5)
+                             </div>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Locação para Eventos</h3>
+                        <p class="text-gray-500 text-sm mb-4">5 espaços exclusivos para excursões e grupos.</p>
+                        <div class="mb-6 flex-grow space-y-2">
+                            <p class="font-bold text-blue-600 text-sm flex items-center gap-2"><i data-lucide="users" width="16"></i> Grandes Grupos</p>
+                            <ul class="space-y-1">
+                                <li class="flex items-center text-gray-600 text-xs"><i data-lucide="check" class="text-green-500 mr-2 w-3"></i> Salão Acácia</li>
+                                <li class="flex items-center text-gray-600 text-xs"><i data-lucide="check" class="text-green-500 mr-2 w-3"></i> Salão Panorâmico</li>
+                            </ul>
+                        </div>
+                        <button onclick="openEventsModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-blue-600/30 text-sm">
+                            <i data-lucide="plus" width="18"></i>
+                            Ver Salões
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AVALIAÇÕES -->
+    <section id="avaliacoes" class="py-24 bg-blue-50 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2 block">Depoimentos</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">O que dizem nossos visitantes</h2>
+                <div class="w-24 h-1.5 bg-yellow-400 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Carrossel de Avaliações -->
+            <div id="testimonials-carousel" class="flex overflow-x-auto gap-6 pb-8 hide-scroll snap-x snap-mandatory px-4">
+                
+                <!-- Avaliação 1 -->
+                <div class="min-w-[300px] md:min-w-[400px] bg-white p-8 rounded-3xl shadow-lg snap-center transform hover:-translate-y-1 transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex gap-1">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6 leading-relaxed">"Lugar fantástico! As piscinas são super limpas e a infraestrutura de churrasqueiras é ótima. Minha família adorou o dia."</p>
+                    <div class="flex items-center gap-4 border-t pt-4 border-gray-100">
+                        <div class="bg-blue-100 rounded-full p-2">
+                             <i data-lucide="user" class="w-6 h-6 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Mariana Silva</p>
+                            <p class="text-xs text-gray-500">Visitou em Janeiro/2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avaliação 2 -->
+                <div class="min-w-[300px] md:min-w-[400px] bg-white p-8 rounded-3xl shadow-lg snap-center transform hover:-translate-y-1 transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex gap-1">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6 leading-relaxed">"O melhor custo benefício da região. As crianças brincaram o dia todo nos toboáguas infantis. Recomendo chegar cedo!"</p>
+                    <div class="flex items-center gap-4 border-t pt-4 border-gray-100">
+                        <div class="bg-blue-100 rounded-full p-2">
+                             <i data-lucide="user" class="w-6 h-6 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Carlos Eduardo</p>
+                            <p class="text-xs text-gray-500">Visitou em Dezembro/2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avaliação 3 -->
+                <div class="min-w-[300px] md:min-w-[400px] bg-white p-8 rounded-3xl shadow-lg snap-center transform hover:-translate-y-1 transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex gap-1">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5 text-gray-300"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6 leading-relaxed">"Segurança muito boa, salva-vidas em todas as piscinas. Senti muita tranquilidade para deixar meus filhos brincarem."</p>
+                    <div class="flex items-center gap-4 border-t pt-4 border-gray-100">
+                        <div class="bg-blue-100 rounded-full p-2">
+                             <i data-lucide="user" class="w-6 h-6 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Fernanda Costa</p>
+                            <p class="text-xs text-gray-500">Visitou em Fevereiro/2025</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Avaliação 4 -->
+                 <div class="min-w-[300px] md:min-w-[400px] bg-white p-8 rounded-3xl shadow-lg snap-center transform hover:-translate-y-1 transition-all">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex gap-1">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6 leading-relaxed">"A pousada é simples mas muito confortável, valeu a pena pegar o pacote de 2 dias. Acordar já dentro do parque é tudo de bom."</p>
+                    <div class="flex items-center gap-4 border-t pt-4 border-gray-100">
+                        <div class="bg-blue-100 rounded-full p-2">
+                             <i data-lucide="user" class="w-6 h-6 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800">Roberto Almeida</p>
+                            <p class="text-xs text-gray-500">Visitou em Janeiro/2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREÇOS -->
+    <section id="valores" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-blue-900 mb-4">Valores e Ingressos</h2>
+                <div class="inline-flex items-center gap-2 bg-yellow-100 text-yellow-800 px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wide mb-2 shadow-sm">
+                    <i data-lucide="calendar" width="16"></i> Temporada 2025/2026: Nov a Março
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200/60">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-800 p-6 text-white text-center font-bold text-xl tracking-wide shadow-md">
+                    Tabela Oficial
+                </div>
+                
+                <div class="divide-y divide-gray-100">
+                    <div class="flex justify-between items-center p-6 hover:bg-blue-50/50 transition-colors">
+                        <div><h4 class="font-bold text-gray-800">Crianças (0 a 4 anos)</h4><p class="text-sm text-gray-500">Acompanhadas de responsável</p></div>
+                        <div class="text-2xl font-bold text-green-600">Grátis</div>
+                    </div>
+                    <div class="flex justify-between items-center p-6 hover:bg-blue-50/50 transition-colors">
+                        <div><h4 class="font-bold text-gray-800">Crianças (5 a 9 anos)</h4><p class="text-sm text-gray-500">Valor único</p></div>
+                        <div class="text-2xl font-bold text-blue-600">R$ 20,00</div>
+                    </div>
+                    <div class="flex justify-between items-center p-6 hover:bg-blue-50/50 transition-colors">
+                        <div><h4 class="font-bold text-gray-800">Adulto (Segunda a Sexta)</h4><p class="text-sm text-gray-500">Exceto feriados</p></div>
+                        <div class="text-2xl font-bold text-blue-600">R$ 30,00</div>
+                    </div>
+                    <div class="flex justify-between items-center p-6 hover:bg-blue-50/50 transition-colors">
+                        <div><h4 class="font-bold text-gray-800">Adulto (Sábados)</h4></div>
+                        <div class="text-2xl font-bold text-blue-600">R$ 35,00</div>
+                    </div>
+                    <div class="flex justify-between items-center p-6 hover:bg-blue-50/50 transition-colors">
+                        <div><h4 class="font-bold text-gray-800">Adulto (Domingos e Feriados)</h4></div>
+                        <div class="text-2xl font-bold text-blue-600">R$ 40,00</div>
+                    </div>
+                    <div class="flex justify-between items-center p-6 hover:bg-blue-50/50 transition-colors bg-gray-50">
+                        <div><h4 class="font-bold text-gray-800">Estacionamento</h4><p class="text-sm text-gray-500">Carro / Moto</p></div>
+                        <div class="text-xl font-bold text-gray-600">R$ 12,00</div>
+                    </div>
+                </div>
+
+                <div class="p-10 bg-gray-50 text-center">
+                     <a href="https://wa.me/5551984148247?text=Ol%C3%A1%2C+gostaria+de+comprar+ingressos+para+o+S%C3%ADtio+do+Beto%21" target="_blank" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-4 px-12 rounded-full shadow-xl hover:shadow-yellow-400/50 transform hover:scale-105 transition-all flex items-center gap-3 mx-auto text-lg justify-center w-full md:w-auto">
+                        <i data-lucide="ticket"></i>
+                        Comprar Ingresso no WhatsApp
+                    </a>
+                    <p class="text-xs text-gray-400 mt-6 max-w-lg mx-auto leading-relaxed">
+                        *Aceitamos cartões de crédito, débito e PIX. Valores sujeitos a alteração sem aviso prévio. 
+                        Em caso de chuvas leves, o parque funciona normalmente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2 block">Tira Dúvidas</span>
+                <h2 class="text-4xl font-bold text-blue-900 mb-4">Perguntas Frequentes</h2>
+                <p class="text-gray-600">Tudo o que você precisa saber antes de vir.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Pergunta 1 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-white text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-800">Quais são os horários de funcionamento?</span>
+                        <i data-lucide="chevron-down" class="text-blue-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                        <div class="p-6 text-gray-600 leading-relaxed border-t border-gray-100">
+                            <strong>Alta Temporada (Nov a Março):</strong><br>
+                            Segunda a Sábado: 09h às 18h.<br>
+                            Domingos e Feriados: 08h às 18h.<br>
+                            <em>Na baixa temporada, abrimos apenas para eventos agendados.</em>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 2 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-white text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-800">Posso levar comida e bebida?</span>
+                        <i data-lucide="chevron-down" class="text-blue-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                        <div class="p-6 text-gray-600 leading-relaxed border-t border-gray-100">
+                            Sim, você pode trazer sua alimentação! Porém, o consumo é permitido <strong>SOMENTE</strong> nas áreas de quiosques/churrasqueiras autorizadas. 
+                            <br><br>
+                            <span class="text-red-600 font-bold">Importante:</span> É estritamente proibido circular com alimentos ou bebidas na área das piscinas. Garrafas e utensílios de <strong>VIDRO são proibidos</strong> em todo o parque por segurança.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 3 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-white text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-800">Como funciona o aluguel de churrasqueiras?</span>
+                        <i data-lucide="chevron-down" class="text-blue-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                        <div class="p-6 text-gray-600 leading-relaxed border-t border-gray-100">
+                            Os quiosques custam R$ 70,00 a diária e comportam até 12 pessoas.<br>
+                            - <strong>Segunda a Sexta:</strong> Ocupação por ordem de chegada.<br>
+                            - <strong>Sábados, Domingos e Feriados:</strong> Necessário reserva antecipada via WhatsApp ou bilheteria.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 4 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-white text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-800">Existem restrições para os toboáguas?</span>
+                        <i data-lucide="chevron-down" class="text-blue-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                        <div class="p-6 text-gray-600 leading-relaxed border-t border-gray-100">
+                            Sim, por segurança:<br>
+                            - Toboáguas radicais: Mínimo de <strong>8 anos</strong> de idade ou <strong>80cm</strong> de altura.<br>
+                            - A descida deve ser individual, sem objetos (óculos, boné) e na posição correta indicada pelos monitores.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 5 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-white text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-800">Posso levar meu animal de estimação?</span>
+                        <i data-lucide="chevron-down" class="text-blue-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                        <div class="p-6 text-gray-600 leading-relaxed border-t border-gray-100">
+                            Não. Para garantir a higiene e segurança de todos os visitantes, a entrada de animais de qualquer porte é proibida no parque.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 6 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-white text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-800">Aceitam cartões e PIX?</span>
+                        <i data-lucide="chevron-down" class="text-blue-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                        <div class="p-6 text-gray-600 leading-relaxed border-t border-gray-100">
+                            Sim! Aceitamos pagamentos via <strong>PIX</strong>, cartões de <strong>crédito e débito</strong> na bilheteria, lanchonetes e lojas do parque.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pergunta 7 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+                    <button class="faq-btn w-full flex justify-between items-center p-6 bg-white text-left focus:outline-none">
+                        <span class="font-bold text-lg text-gray-800">O parque fecha se chover?</span>
+                        <i data-lucide="chevron-down" class="text-blue-600 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                        <div class="p-6 text-gray-600 leading-relaxed border-t border-gray-100">
+                            Em dias de chuvas leves, o parque funciona normalmente. Apenas em caso de tempestades com raios ou ventos muito fortes, as piscinas poderão ser evacuadas temporariamente por segurança.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAPA / LOCALIZAÇÃO -->
+    <section id="localizacao" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center bg-white rounded-[3rem] p-6 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100">
+                <div class="space-y-8">
+                    <h2 class="text-4xl font-bold text-blue-900 flex items-center gap-3">
+                        <i data-lucide="map-pin" class="text-red-500 fill-red-100 w-10 h-10"></i>
+                        Como Chegar
+                    </h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Estamos localizados em uma área privilegiada em Gravataí, de fácil acesso pela Rodovia.
+                        <br><br>
+                        <strong class="text-xl text-gray-900 block mb-2">Gravataí, Rio Grande do Sul</strong>
+                        <span class="text-sm text-gray-500 block">Siga as placas indicativas "Sítio do Beto"</span>
+                    </p>
+                    
+                    <a href="https://maps.google.com" target="_blank" class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-blue-600/30 transition-all transform hover:-translate-y-1">
+                        <i data-lucide="navigation" width="24"></i>
+                        Traçar Rota no Waze/Maps
+                    </a>
+                </div>
+                
+                <div class="h-[400px] w-full rounded-3xl overflow-hidden shadow-inner bg-gray-200 relative group">
+                    <iframe 
+                        title="Localização do Parque"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0" 
+                        loading="lazy" 
+                        allowfullscreen
+                        class="grayscale group-hover:grayscale-0 transition-all duration-700"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3466.864389146908!2d-50.9856!3d-29.9431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zGravataí!5e0!3m2!1sen!2sbr">
+                    </iframe>
+                    <div class="absolute inset-0 pointer-events-none ring-4 ring-black/5 rounded-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-blue-950 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6 text-yellow-400">Sítio do Beto</h3>
+                    <p class="text-blue-200 leading-relaxed">
+                        O destino perfeito para o seu verão. Venha viver momentos inesquecíveis com quem você ama.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-6 text-white border-b border-blue-800 pb-2 inline-block">Contato</h4>
+                    <ul class="space-y-4 text-blue-200">
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i data-lucide="phone" width="18"></i> (51) 98414-8247</li>
+                        <li class="flex items-center justify-center md:justify-start gap-3"><i data-lucide="mail" width="18"></i> contato@sitiodobeto.com.br</li>
+                    </ul>
+                </div>
+                <div>
+                     <h4 class="text-xl font-bold mb-6 text-white border-b border-blue-800 pb-2 inline-block">Redes Sociais</h4>
+                     <div class="flex justify-center md:justify-start gap-4">
+                        <a href="https://www.instagram.com/sitiodobetooficial/" target="_blank" class="bg-blue-900/50 p-3 rounded-full hover:bg-pink-600 transition-all hover:scale-110"><i data-lucide="instagram"></i></a>
+                        <a href="https://www.facebook.com/p/Sitio-Do-Beto-100063943324780/?locale=pt_BR" target="_blank" class="bg-blue-900/50 p-3 rounded-full hover:bg-blue-600 transition-all hover:scale-110"><i data-lucide="facebook"></i></a>
+                        <a href="https://wa.me/5551984148247" target="_blank" class="bg-blue-900/50 p-3 rounded-full hover:bg-green-600 transition-all hover:scale-110"><i data-lucide="message-circle"></i></a>
+                     </div>
+                </div>
+            </div>
+            <div class="border-t border-blue-900 pt-8 text-center text-blue-400 text-sm">
+                <p>&copy; 2025 Sítio do Beto Parque Aquático. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX (MODAL DE ZOOM - ATRAÇÕES) -->
+    <div id="lightbox" class="fixed inset-0 z-[60] bg-black/95 hidden items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2 bg-white/10 rounded-full hover:bg-white/20">
+            <i data-lucide="x" width="32" height="32"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Zoom" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- RENTAL MODAL (DETALHES DE ALUGUEL) -->
+    <div id="rental-modal" class="fixed inset-0 z-[60] bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md opacity-0 transition-opacity duration-300 overflow-y-auto">
+        <div class="bg-white w-full max-w-6xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row relative transform scale-95 transition-transform duration-300 my-auto h-auto md:h-[80vh]">
+            
+            <button onclick="closeRentalModal()" class="absolute top-4 right-4 z-20 text-gray-500 hover:text-gray-900 bg-white/50 hover:bg-white p-2 rounded-full transition-colors backdrop-blur-sm">
+                <i data-lucide="x" width="24" height="24"></i>
+            </button>
+
+            <!-- Galeria de Imagens (Esquerda) -->
+            <div class="w-full md:w-2/3 bg-gray-100 flex flex-col h-[50vh] md:h-full">
+                <div class="flex-grow relative overflow-hidden group">
+                     <img id="rental-main-img" src="" alt="Destaque" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                     <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+                         <h3 id="rental-title-overlay" class="text-white text-2xl font-bold md:hidden">Título</h3>
+                     </div>
+                </div>
+                <div class="h-24 md:h-32 bg-gray-900 p-2 flex gap-2 overflow-x-auto hide-scroll" id="rental-thumbnails">
+                    <!-- Thumbnails inseridos via JS -->
+                </div>
+            </div>
+
+            <!-- Detalhes (Direita) -->
+            <div class="w-full md:w-1/3 p-8 md:p-10 flex flex-col bg-white overflow-y-auto">
+                <h3 id="rental-title" class="text-3xl font-bold text-blue-900 mb-2 hidden md:block">Título</h3>
+                <p id="rental-price" class="text-xl font-bold text-green-600 mb-6"></p>
+                
+                <div class="space-y-6 flex-grow">
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2 border-b pb-1">Descrição</h4>
+                        <p id="rental-desc" class="text-gray-600 text-sm leading-relaxed whitespace-pre-line"></p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2 border-b pb-1">O que oferece</h4>
+                        <ul id="rental-features" class="space-y-2">
+                            <!-- Features inseridas via JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <a href="https://wa.me/5551984148247?text=Ol%C3%A1%2C+tenho+interesse+em+alugar+um+espa%C3%A7o." target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-green-500/30 transform hover:-translate-y-1">
+                        <i data-lucide="message-circle" width="20"></i>
+                        Reservar Agora
+                    </a>
+                    <p class="text-xs text-center text-gray-400 mt-3">Reserve com antecedência para garantir sua data.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ATTRACTION MODAL (DETALHES DAS ATRAÇÕES) -->
+    <div id="attraction-modal" class="fixed inset-0 z-[60] bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md opacity-0 transition-opacity duration-300 overflow-y-auto">
+        <div class="bg-white w-full max-w-6xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row relative transform scale-95 transition-transform duration-300 my-auto h-auto md:h-[80vh]">
+            
+            <button onclick="closeAttractionModal()" class="absolute top-4 right-4 z-20 text-gray-500 hover:text-gray-900 bg-white/50 hover:bg-white p-2 rounded-full transition-colors backdrop-blur-sm">
+                <i data-lucide="x" width="24" height="24"></i>
+            </button>
+
+            <!-- Galeria de Imagens (Esquerda) -->
+            <div class="w-full md:w-2/3 bg-gray-100 flex flex-col h-[50vh] md:h-full">
+                <div class="flex-grow relative overflow-hidden group">
+                     <img id="attraction-main-img" src="" alt="Destaque" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                     <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+                         <h3 id="attraction-title-overlay" class="text-white text-2xl font-bold md:hidden">Título</h3>
+                     </div>
+                </div>
+                <div class="h-24 md:h-32 bg-gray-900 p-2 flex gap-2 overflow-x-auto hide-scroll" id="attraction-thumbnails">
+                    <!-- Thumbnails inseridos via JS -->
+                </div>
+            </div>
+
+            <!-- Detalhes (Direita) -->
+            <div class="w-full md:w-1/3 p-8 md:p-10 flex flex-col bg-white overflow-y-auto">
+                <span class="text-blue-500 font-bold uppercase text-xs tracking-widest mb-1 block">Atração Principal</span>
+                <h3 id="attraction-title" class="text-3xl font-bold text-blue-900 mb-1 hidden md:block">Título</h3>
+                <p id="attraction-subtitle" class="text-lg font-medium text-gray-500 mb-6"></p>
+                
+                <div class="space-y-6 flex-grow">
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2 border-b pb-1">Sobre a atração</h4>
+                        <p id="attraction-desc" class="text-gray-600 text-sm leading-relaxed whitespace-pre-line"></p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2 border-b pb-1">Características & Segurança</h4>
+                        <ul id="attraction-features" class="space-y-2">
+                            <!-- Features inseridas via JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <a href="https://wa.me/5551984148247?text=Olá, tenho uma dúvida sobre as atrações." target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-blue-600/30 transform hover:-translate-y-1">
+                        <i data-lucide="message-circle" width="20"></i>
+                        Tirar Dúvida no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOVO MODAL DE EVENTOS (5 SALÕES) -->
+    <div id="events-modal" class="fixed inset-0 z-[60] bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md opacity-0 transition-opacity duration-300 overflow-y-auto">
+        <div class="bg-white w-full max-w-7xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row relative transform scale-95 transition-transform duration-300 my-auto h-[90vh] md:h-[80vh]">
+            
+            <button onclick="closeEventsModal()" class="absolute top-4 right-4 z-20 text-gray-500 hover:text-gray-900 bg-white/50 hover:bg-white p-2 rounded-full transition-colors backdrop-blur-sm">
+                <i data-lucide="x" width="24" height="24"></i>
+            </button>
+
+            <!-- Menu Lateral (Seleção de Salões) -->
+            <div class="w-full md:w-1/4 bg-gray-50 border-r border-gray-200 flex flex-col">
+                <div class="p-6 bg-blue-900 text-white">
+                    <h3 class="text-xl font-bold flex items-center gap-2"><i data-lucide="layout-grid" width="20"></i> Nossos Espaços</h3>
+                    <p class="text-blue-200 text-xs mt-1">Selecione para ver detalhes</p>
+                </div>
+                <div class="flex-grow overflow-y-auto p-4" id="event-spaces-list">
+                    <!-- Botões gerados via JS -->
+                </div>
+            </div>
+
+            <!-- Área de Conteúdo (Foto + Detalhes) -->
+            <div class="w-full md:w-3/4 flex flex-col md:flex-row h-full">
+                <!-- Galeria (Meio) -->
+                <div class="w-full md:w-2/3 h-[40vh] md:h-full bg-gray-900 relative flex flex-col">
+                    <div class="flex-grow relative group overflow-hidden">
+                        <img id="event-main-img" src="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                            <h2 id="event-title-overlay" class="text-3xl font-bold text-white md:hidden">Título do Salão</h2>
+                        </div>
+                    </div>
+                    <!-- Thumbnails do Evento -->
+                    <div class="h-24 bg-black/50 p-2 flex gap-2 overflow-x-auto hide-scroll backdrop-blur-sm absolute bottom-0 w-full" id="event-thumbnails">
+                        <!-- Thumbs gerados via JS -->
+                    </div>
+                </div>
+
+                <!-- Info (Direita) -->
+                <div class="w-full md:w-1/3 p-8 overflow-y-auto bg-white">
+                    <h2 id="event-title" class="text-3xl font-bold text-blue-900 mb-2 hidden md:block">Título do Salão</h2>
+                    <div class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-6" id="event-capacity">Capacidade: 200 Pessoas</div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-2 border-b pb-1">Descrição do Espaço</h4>
+                            <p id="event-desc" class="text-gray-600 text-sm leading-relaxed"></p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-2 border-b pb-1">Destaques</h4>
+                            <ul id="event-features" class="space-y-2">
+                                <!-- Features geradas via JS -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-100">
+                        <a href="https://wa.me/5551984148247?text=Olá, gostaria de um orçamento para eventos." target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors shadow-lg hover:shadow-blue-600/30 transform hover:-translate-y-1">
+                            <i data-lucide="message-circle" width="20"></i>
+                            Solicitar Orçamento
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/5551984148247?text=Ol%C3%A1%2C+vim+pelo+site+S%C3%ADtio+do+Beto%21" 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 flex items-center justify-center border-2 border-white animate-bounce-slow"
+       aria-label="WhatsApp">
+        <i data-lucide="message-circle" width="28" height="28"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
